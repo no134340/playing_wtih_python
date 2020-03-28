@@ -35,9 +35,8 @@ import matplotlib.pyplot as plt
 import wget
 import os
 
-
 matplotlib.rcParams.update({'font.size': 6})
-url = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv'
+url = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'
 data_csv = wget.download(url)
 data = pd.read_csv(data_csv)
 os.remove(data_csv)
@@ -55,18 +54,20 @@ diff_by_day = list(diff_by_day)
 
 fig, axs = plt.subplots(2, figsize=(8, 8), dpi=300)
 days = list(range(1, serbia_cases.size + 1))
-axs[0].bar(dates, serbia_cases)
+axs[0].bar(list(range(1, len(serbia_cases) + 1)), serbia_cases)
 axs[0].legend(['slučajeva(potvrđeno) / dan'])
-axs[0].set_yticks(np.arange(min(serbia_cases), max(serbia_cases) + 1, 2))
+axs[0].set_yticks(np.arange(0, max(serbia_cases) + 20, 20))
+axs[0].set_xticks(np.arange(1, len(serbia_cases) + 1, 1))
 growth = [0]
 for i in range(1, len(diff_by_day)):
     if diff_by_day[i - 1] != 0:
         growth.append(diff_by_day[i] / diff_by_day[i - 1])
     else:
         growth.append(0)
-axs[1].plot(dates, growth, 'r')
+axs[1].plot(list(range(1, len(growth) + 1)), growth, 'r')
 axs[1].legend(['faktor rasta / dan'])
 axs[1].set_yticks(np.arange(min(growth), max(growth) + 1, 0.25))
+axs[1].set_xticks(np.arange(1, len(growth) + 1, 1))
 plt.savefig('serbia_stats.png')
 
 tmp = [serbia_cases, growth]
