@@ -12,12 +12,12 @@ Dependecies:
       3. install matplotlib
       	$ pip3 install matplotlib
       	
-    *** install matplotlib sytem wide (NOT RECOMMENDED) ***
+    *** install matplotlib sytem-wide (NOT RECOMMENDED) ***
         $ pip3 install matplotlib
         
 Run with:
 
     $ python3 main.py
     
-either from the virtual environment or using the system-wide interpreter (if matplotlib was installed system-wide)
+either from the activated virtual environment or using the system-wide interpreter (if matplotlib was installed system-wide)
 
